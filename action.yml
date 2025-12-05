@@ -13,6 +13,7 @@ inputs:
   number-to-keep:
     description: "Number of previous deployments to keep"
     required: false
+    default: '4'
 
 runs:
   using: "composite"
