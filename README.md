@@ -17,6 +17,24 @@ Deploy to IIS using PowerShell script to avoid downtime.
 | `destination-path` | Yes | `C:\inetpub\website-releases` | | The path to the site directory that will be deployed |
 | `number-to-keep`   | No  | `4` | | Number of previous deployments to keep |
 
+## How it works
+
+This action deploys the website to a versioned directory inside the `destination-path`.
+The directories are named using the pattern `r_<version>`, for example `r_1`, `r_2`, etc.
+
+When a new deployment runs:
+1. A new directory is created (e.g. `r_5`).
+2. The site content is copied to this new directory.
+3. The IIS website physical path is updated to point to this new directory.
+4. Old directories are cleaned up, keeping only the number specified in `number-to-keep`.
+
+Example structure in `C:\inetpub\website-releases`:
+```
+r_3
+r_4
+r_5  <-- IIS points here
+```
+
 ## Usage
 
 <!-- start usage -->
